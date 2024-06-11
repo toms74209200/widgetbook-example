@@ -7,3 +7,10 @@ ${PROJECT_DIR}/lib/widgetboo.directories.g.dart:
 
 widgetbook: ${PROJECT_DIR}/lib/widgetboo.directories.g.dart
 	cd ${PROJECT_DIR} && flutter run -t lib/widgetbook.dart
+
+${PROJECT_DIR}/build/web/index.html: ${PROJECT_DIR}/lib/widgetboo.directories.g.dart
+	cd ${PROJECT_DIR} && flutter build web -t lib/widgetbook.dart
+
+.PHONY: web
+
+web: ${PROJECT_DIR}/build/web/index.html
