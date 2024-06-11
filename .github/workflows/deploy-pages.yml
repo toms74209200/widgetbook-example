@@ -26,8 +26,12 @@ jobs:
       - name: Install dependencies
         working-directory: widgetbook_example
         run: flutter pub get
+      - name: Setup URL
+        run: echo "REPOSITORY_NAME=${GITHUB_REPOSITORY#${GITHUB_REPOSITORY_OWNER}/}" >> $GITHUB_ENV
       - name: Build Widgetbook web
         run: make web
+        env:
+          FLUTTER_BASE_HREF: /${{ env.REPOSITORY_NAME }}/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: 'widgetbook_example/build/web'
