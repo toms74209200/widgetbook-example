@@ -1,0 +1,30 @@
+name: Deploy Widgetbook web
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+        - 'widgetbook_example/**'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: github-pages
+    steps:
+      - uses: actions/checkout@v4
+      - uses: flutter-actions/setup-flutter@v3
+        with:
+          version: latest
+          channel: stable
+      - name: Build Widgetbook web
+        run: make web
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'build/web'
+      - uses: actions/deploy-pages@v4
