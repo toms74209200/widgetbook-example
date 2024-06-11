@@ -6,6 +6,7 @@ on:
       - master
     paths:
         - 'widgetbook_example/**'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -22,9 +23,12 @@ jobs:
         with:
           version: latest
           channel: stable
+      - name: Install dependencies
+        working-directory: widgetbook_example
+        run: flutter pub get
       - name: Build Widgetbook web
         run: make web
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: 'build/web'
+          path: 'widgetbook_example/build/web'
       - uses: actions/deploy-pages@v4
