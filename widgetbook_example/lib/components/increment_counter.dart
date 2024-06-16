@@ -9,7 +9,7 @@ class IncrementCounter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () {},
+      onPressed: onPressed,
       tooltip: 'Increment',
       child: const Icon(Icons.add),
     );
